@@ -1,3 +1,5 @@
+// Populando o <select> com as cidades
+
 let lista = document.getElementById('city-dropdown');
 lista.length = 0;
 
@@ -24,6 +26,28 @@ function getCitiesList() {
 }
 getCitiesList();
 
+// Metodo GET para Customer
+
+function getCustomers() {
+    axios.get('https://customers-challenge.herokuapp.com/customers').then(function (response) {
+        const data = response.data._embedded.customers;
+        console.log(data);
+        document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
+            return (
+                '<tr>' +
+                '<td>' + cliente.name + '</td>' +
+                '</tr>'
+            );
+        }).join('')
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+getCustomers();
+
+// Metodo POST para Customer
+
 function postCustomer() {
     document.getElementById('postc').onclick = function () {
         var dataCustomer = document.getElementById('customer').value;
@@ -38,6 +62,7 @@ function postCustomer() {
             .then(function (response) {
                 console.log(response);
                 alert("Cliente cadastrado com sucesso!");
+                getCustomers();
             })
             .catch(function (error) {
                 console.log(error);
