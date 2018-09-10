@@ -33,29 +33,23 @@
 
 // //getCustomers();
 
-function postCity() {
-    document.getElementById('post').onclick = function() {
-        var data = document.getElementById('city').value;
-        var jsonData = JSON.stringify({ name: (data) });
-        var cityJSON = JSON.parse(jsonData);
-
-            axios.post('https://customers-challenge.herokuapp.com/cities', cityJSON)
-                .then(function(response) {
-                    console.log(response);
-                    alert("Cidade cadastrada com sucesso!");
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-    };
-};
-
-postCity();
-
 // function postCity() {
-//     axios.post('https://customers-challenge.herokuapp.com/cities', ).then(function (response){
-//         console.log(response);
-//     }).catch(function(error){
-//         console.log(error);
-//     })
-// }
+//     document.getElementById('post').onclick = function() {
+//         var data = document.getElementById('city').value;
+//         var jsonData = JSON.stringify({ name: (data) });
+//         var cityJSON = JSON.parse(jsonData);
+
+//             axios.post('https://customers-challenge.herokuapp.com/cities', cityJSON)
+//                 .then(function(response) {
+//                     console.log(response);
+//                     alert("Cidade cadastrada com sucesso!");
+//                 })
+//                 .catch(function(error) {
+//                     console.log(error);
+//                 });
+//     };
+// };
+
+// postCity();
+
+
