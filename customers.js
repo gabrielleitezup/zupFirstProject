@@ -1,3 +1,23 @@
+// Metodo GET para Customer
+
+function getCustomers() {
+    axios.get('https://customers-challenge.herokuapp.com/customers').then(function (response) {
+        const data = response.data._embedded.customers;
+        console.log(data);
+        document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
+            return (
+                '<tr>' +
+                '<td>' + cliente.name + '</td>' +
+                '</tr>'
+            );
+        }).join('')
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+getCustomers();
+
 // Populando o <select> com as cidades
 
 let lista = document.getElementById('city-dropdown');
@@ -25,26 +45,6 @@ function getCitiesList() {
     });
 }
 getCitiesList();
-
-// Metodo GET para Customer
-
-function getCustomers() {
-    axios.get('https://customers-challenge.herokuapp.com/customers').then(function (response) {
-        const data = response.data._embedded.customers;
-        console.log(data);
-        document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
-            return (
-                '<tr>' +
-                '<td>' + cliente.name + '</td>' +
-                '</tr>'
-            );
-        }).join('')
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-getCustomers();
 
 // Metodo POST para Customer
 
