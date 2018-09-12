@@ -8,7 +8,9 @@ function getCustomers() {
             return (
                 '<tr>' +
                 '<td>' + cliente.name + '</td>' +
-                '<td>' + cliente._links.city.href + '</td>' +
+                '<td>' + getCityCustomer(cliente._links.city.href) + '</td>' +
+                '<td> <button type="button" class="btn btn-warning">Modificar</button> </td>' +
+                '<td> <button type="button" class="btn btn-danger" onclick="clienteDelete(\'' + cliente._links.self.href + '\')">Deletar</button> </td>' +
                 '</tr>'
             );
         }).join('')
@@ -72,7 +74,35 @@ function postCustomer() {
 };
 postCustomer();
 
-// //Metodo
-// getCityCustomer (url) {
-//     axios.get()
-// }
+// Metodo DELETE para Customer
+
+function clienteDelete(url) {
+    document.getElementById('deleteCustomer').onclick = function () {
+        axios.delete(url)
+            .then(function (response) {
+                console.log(response);
+                $('#deleteCustomerModal').modal("hide")
+                alert("Customer deletado com sucesso!");
+                getCustomers();
+            })
+            .catch(function (error) {
+                console.log(error);
+                $('#deleteCustomerModal').modal("hide");
+                alert('Não foi possível deletar o cliente!');
+            });
+    }
+    $('#deleteCustomerModal').modal("show")
+};
+
+// Metodo para exibir CUSTOMER na tabela(BUGADO)
+function getCityCustomer(url) {
+    axios.get(url)
+        .then(function (response) {
+            console.log(response);
+            cityName = JSON.stringify(response.data.name);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+}

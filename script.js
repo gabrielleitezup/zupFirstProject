@@ -76,6 +76,7 @@ function showModalChange(url) {
     };
     $('#cityModal').modal("show");
 };
+
 //Metodo modifica elemento
 
 function modifyContent(url){
@@ -88,15 +89,12 @@ function modifyContent(url){
         });
 }
 
-//Metodo DELETE
+//Metodo DELETE para City
 
 function cityDelete(url) {   
     modifyContent(url);
     document.getElementById('delete').onclick = function () {
-        var data = document.getElementById('nameCity').innerText
-        var jsonData = JSON.stringify({ name: (data) });
-        var cityJSON = JSON.parse(jsonData);
-        axios.delete(url, cityJSON)
+        axios.delete(url)
             .then(function (response) {
                 console.log(response);
                 $('#deleteCityModal').modal("hide")

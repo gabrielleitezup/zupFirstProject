@@ -34,6 +34,23 @@
     </div>
 </div>
 
+<!-- Modal Deletar Customer -->
+
+<div class="modal" id="deleteCustomerModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Tem certeza que deseja deletar este cliente?
+                <h5 id="nameCustomer"></h5>
+            </div>            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="deleteCustomer">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Corpo do arquivo -->
 
 <body>
@@ -46,6 +63,8 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Cidade</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="tabclientes">
