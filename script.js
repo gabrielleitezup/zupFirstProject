@@ -9,6 +9,7 @@ function getCities() {
                 '<tr>' +
                 '<td>' + city.name + '</td>' +
                 '<td> <button type="button" class="btn btn-warning" onclick="showModalChange(\'' + city._links.self.href + '\');">Modificar</button> </td>' +
+                '<td> <button type="button" class="btn btn-danger" onclick="cityDelete(\'' + city._links.self.href + '\');">Deletar</button>' +
                 '</tr>'
             );
         }).join('');
@@ -40,7 +41,7 @@ function postCity() {
 
 //Limpa o Modal antes de adicionar uma cidade
 
-function showModalAdd() {    
+function showModalAdd() {
     var entradaCity = document.getElementById('city');
     entradaCity.value = "";
     postCity();
@@ -74,4 +75,39 @@ function showModalChange(url) {
             });
     };
     $('#cityModal').modal("show");
+};
+//Metodo modifica elemento
+
+function modifyContent(url){
+    axios.get(url).then(function (response) {
+        cityName = response.data.name;
+        document.getElementById('nameCity').innerText = cityName;
+    })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+//Metodo DELETE
+
+function cityDelete(url) {   
+    modifyContent(url);
+    document.getElementById('delete').onclick = function () {
+        var data = document.getElementById('nameCity').innerText
+        var jsonData = JSON.stringify({ name: (data) });
+        var cityJSON = JSON.parse(jsonData);
+        axios.delete(url, cityJSON)
+            .then(function (response) {
+                console.log(response);
+                $('#deleteCityModal').modal("hide")
+                alert("Cidade deletada com sucesso!");                
+                getCities();
+            })
+            .catch(function (error) {
+                console.log(error);
+                $('#deleteCityModal').modal("hide")
+                alert("Essa cidada possui clientes, não é possivel deleta-la")                
+            });
+    }
+    $('#deleteCityModal').modal("show")
 };

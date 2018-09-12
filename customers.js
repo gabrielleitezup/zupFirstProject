@@ -8,6 +8,7 @@ function getCustomers() {
             return (
                 '<tr>' +
                 '<td>' + cliente.name + '</td>' +
+                '<td>' + cliente._links.city.href + '</td>' +
                 '</tr>'
             );
         }).join('')
@@ -70,3 +71,8 @@ function postCustomer() {
     };
 };
 postCustomer();
+
+// //Metodo
+// getCityCustomer (url) {
+//     axios.get()
+// }

@@ -28,18 +28,38 @@
     </div>
 </div>
 
+<!-- Modal Deletar City -->
+
+<div class="modal" id="deleteCityModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Tem certeza que deseja deletar esta cidade?
+                <h5 id="nameCity"></h5>
+            </div>            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="delete">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Corpo do arquivo -->
 
 <body>
     <div></div>
     <div class="container">
         <h3>Home</h3>
-        <button type="button" class="btn btn-success" data-toggle="modal" onclick="showModalAdd();" id="addCity">Adicionar cidade (+)</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" onclick="showModalAdd();" id="addCity">Adicionar
+            cidade (+)</button>
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
                     <th>Cidades</th>
-                    <th>Opções</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="tabela">
@@ -57,7 +77,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="script.js"></script>    
+    <script src="script.js"></script>
 </body>
 
 </html>
