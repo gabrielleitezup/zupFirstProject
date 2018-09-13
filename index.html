@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <!-- Modal Cities -->
@@ -36,7 +37,7 @@
             <div class="modal-body">
                 Tem certeza que deseja deletar esta cidade?
                 <h5 id="nameCity"></h5>
-            </div>            
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="delete">Sim</button>
@@ -45,19 +46,25 @@
     </div>
 </div>
 
+<!-- Navbar -->
+<script src="navbar.js"></script>
+<script>navbar();</script>
+<div id="navPlaceHolder">
+
+</div>
 
 <!-- Corpo do arquivo -->
 
 <body>
     <div></div>
-    <div class="container">
+    <div class="container-fluid">
         <h3>Home</h3>
         <button type="button" class="btn btn-success" data-toggle="modal" onclick="showModalAdd();" id="addCity">Adicionar
             cidade (+)</button>
         <table class="table table-striped">
-            <thead class="thead-dark">
+            <thead class="thead-dark alinha">
                 <tr>
-                    <th>Cidades</th>
+                    <th >Cidades</th>
                     <th></th>
                     <th></th>
                 </tr>

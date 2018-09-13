@@ -6,7 +6,7 @@ function getCustomers(url) {
         console.log(data);
         document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
             return (
-                '<tr>' +
+                '<tr class="alinha">' +
                 '<td>' + cliente.name + '</td>' +
                 '<td>' + getCityCustomer(cliente._links.city.href) + '</td>' +
                 '<td> <button type="button" class="btn btn-warning">Modificar</button> </td>' +
@@ -76,10 +76,10 @@ postCustomer();
 
 //Metodo para limpar a entrada do Modal
 
-function cleanModalAdd(){
+function cleanModalAdd() {
     var inputCustomer = document.getElementById('inputCustomer')
     inputCustomer.value = "";
-    
+
 }
 
 // Metodo DELETE para Customer
@@ -102,16 +102,15 @@ function clienteDelete(url) {
     $('#deleteCustomerModal').modal("show")
 };
 
-function searchCustomer(){
-    var url='https://customers-challenge.herokuapp.com/customers/search/findByNameIgnoreCaseContaining?name=';
+//Metodo de SEARCH
+
+function searchCustomer() {
+    var url = 'https://customers-challenge.herokuapp.com/customers/search/findByNameIgnoreCaseContaining?name=';
     var inputSearch = document.getElementById('inputSearch').value;
     url += inputSearch;
     // console.log(url);
     getCustomers(url);
 };
-
-
-
 
 //////////////////////////////////////////////
 // Metodo para Modificar o CUSTOMER
@@ -122,7 +121,7 @@ function searchCustomer(){
 
 // Metodo para exibir cidade do CUSTOMER na tabela(BUGADO)
 function getCityCustomer(url) {
-   return axios.get(url)
+    return axios.get(url)
         .then(function (response) {
             console.log(response);
             var cityName = JSON.stringify(response.data.name);

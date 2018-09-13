@@ -6,7 +6,7 @@ function getCities() {
         console.log(data);
         document.getElementById("tabela").innerHTML = data.map(function (city) {
             return (
-                '<tr>' +
+                '<tr class="alinha">' +
                 '<td>' + city.name + '</td>' +
                 '<td> <button type="button" class="btn btn-warning" onclick="showModalChange(\'' + city._links.self.href + '\');">Modificar</button> </td>' +
                 '<td> <button type="button" class="btn btn-danger" onclick="cityDelete(\'' + city._links.self.href + '\');">Deletar</button>' +
@@ -109,3 +109,4 @@ function cityDelete(url) {
     }
     $('#deleteCityModal').modal("show")
 };
+
