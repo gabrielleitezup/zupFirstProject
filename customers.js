@@ -65,7 +65,7 @@ function postCustomer() {
             .then(function (response) {
                 console.log(response);
                 alert("Cliente cadastrado com sucesso!");
-                getCustomers();
+                getCustomers('https://customers-challenge.herokuapp.com/customers');
             })
             .catch(function (error) {
                 console.log(error);
@@ -91,7 +91,7 @@ function clienteDelete(url) {
                 console.log(response);
                 $('#deleteCustomerModal').modal("hide")
                 alert("Customer deletado com sucesso!");
-                getCustomers();
+                getCustomers('https://customers-challenge.herokuapp.com/customers');
             })
             .catch(function (error) {
                 console.log(error);
