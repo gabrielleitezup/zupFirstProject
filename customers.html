@@ -42,7 +42,7 @@
             <div class="modal-body">
                 Tem certeza que deseja deletar este cliente?
                 <h5 id="nameCustomer"></h5>
-            </div>            
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="deleteCustomer">Sim</button>
@@ -56,8 +56,14 @@
 <body>
     <div class="container">
         <h3>Customers</h3>
-        <button class="btn btn-success trigger" data-toggle="modal" data-target="#customerModal">Adicionar
-            customer (+)</button>
+
+        <div id="functions">
+            <button class="btn btn-success trigger" data-toggle="modal" data-target="#customerModal">Adicionar
+                customer (+)</button>
+            <input type="text" id="inputSearch" placeholder="Pesquisa...">
+            <button class="btn" type="button" id="buttonSearch" onclick="searchCustomer()">Find</button>
+        </div>
+
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>

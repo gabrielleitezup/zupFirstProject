@@ -1,7 +1,7 @@
 // Metodo GET para Customer
 
-function getCustomers() {
-    axios.get('https://customers-challenge.herokuapp.com/customers').then(function (response) {
+function getCustomers(url) {
+    axios.get(url).then(function (response) {
         const data = response.data._embedded.customers;
         console.log(data);
         document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
@@ -18,8 +18,8 @@ function getCustomers() {
         console.log(error);
     });
 }
-
-getCustomers();
+urlCustomers = 'https://customers-challenge.herokuapp.com/customers';
+getCustomers(urlCustomers);
 
 // Populando o <select> com as cidades
 
@@ -53,7 +53,7 @@ getCitiesList();
 
 function postCustomer() {
     document.getElementById('postc').onclick = function () {
-        var dataCustomer = document.getElementById('customer').value;
+        var dataCustomer = document.getElementById('inputCustomer').value;
         var dataCity = document.getElementById('city-dropdown').value;
         var dataJSON = JSON.stringify({
             name: (dataCustomer),
@@ -73,6 +73,14 @@ function postCustomer() {
     };
 };
 postCustomer();
+
+//Metodo para limpar a entrada do Modal
+
+function cleanModalAdd(){
+    var inputCustomer = document.getElementById('inputCustomer')
+    inputCustomer.value = "";
+    
+}
 
 // Metodo DELETE para Customer
 
@@ -94,12 +102,31 @@ function clienteDelete(url) {
     $('#deleteCustomerModal').modal("show")
 };
 
-// Metodo para exibir CUSTOMER na tabela(BUGADO)
+function searchCustomer(){
+    var url='https://customers-challenge.herokuapp.com/customers/search/findByNameIgnoreCaseContaining?name=';
+    var inputSearch = document.getElementById('inputSearch').value;
+    url += inputSearch;
+    // console.log(url);
+    getCustomers(url);
+};
+
+
+
+
+//////////////////////////////////////////////
+// Metodo para Modificar o CUSTOMER
+
+// function changeCustomer(){
+
+// }
+
+// Metodo para exibir cidade do CUSTOMER na tabela(BUGADO)
 function getCityCustomer(url) {
-    axios.get(url)
+   return axios.get(url)
         .then(function (response) {
             console.log(response);
-            cityName = JSON.stringify(response.data.name);
+            var cityName = JSON.stringify(response.data.name);
+            return cityName;
         })
         .catch(function (error) {
             console.log(error);
