@@ -72,15 +72,6 @@ function postCustomer() {
             });
     };
 };
-postCustomer();
-
-//Metodo para limpar a entrada do Modal
-
-function cleanModalAdd() {
-    var inputCustomer = document.getElementById('inputCustomer')
-    inputCustomer.value = "";
-
-}
 
 // Metodo DELETE para Customer
 
@@ -113,11 +104,27 @@ function searchCustomer() {
 };
 
 //////////////////////////////////////////////
+
+//Metodo para limpar a entrada do Modal
+
+function cleanModalAdd() {
+    var inputCustomer = document.getElementById('inputCustomer')
+    inputCustomer.value = "";
+    postCustomer();
+    $('#customerModal').modal('show');
+}
+
 // Metodo para Modificar o CUSTOMER
 
-// function changeCustomer(){
-
-// }
+function changeCustomer(url) {
+    axios.get(url)
+    .then(function(response){
+        console.log(response);
+        customerName = response.data.name;
+        document.getElementById('inputCustomer').value = customerName;
+    })
+}
+console.log(lista);
 
 // Metodo para exibir cidade do CUSTOMER na tabela(BUGADO)
 function getCityCustomer(url) {
