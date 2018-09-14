@@ -1,23 +1,30 @@
 // Metodo GET para Customer
-
+var test;
 function getCustomers(url) {
     axios.get(url).then(function (response) {
-        const data = response.data._embedded.customers;
-        console.log(data);
-        document.getElementById("tabclientes").innerHTML = data.map(function (cliente) {
-            return (
-                '<tr class="alinha">' +
-                '<td>' + cliente.name + '</td>' +
-                '<td>' + getCityCustomer(cliente._links.city.href) + '</td>' +
-                '<td> <button type="button" class="btn btn-warning">Modificar</button> </td>' +
-                '<td> <button type="button" class="btn btn-danger" onclick="clienteDelete(\'' + cliente._links.self.href + '\')">Deletar</button> </td>' +
-                '</tr>'
+        const resposta = response.data._embedded.customers;
+        console.log(resposta);
+        var text = document.getElementById("tabclientes");
+        text.innerHTML = '';       
+        for (var i = 0; i < resposta.length; i++) {
+            getCityCustomer(resposta[i]._links.city.href, function (nameCity,j) {
+                    test=nameCity;
+                    html= '';
+                    html+= '<tr class="alinha">';
+                    html+= '<td>' + resposta[j].name + '</td>';
+                    html+= '<td>' + nameCity.name + '</td>';
+                    html+= '<td> <button type="button" class="btn btn-warning">Modificar</button> </td>';
+                    html+= '<td> <button type="button" class="btn btn-danger" onclick="clienteDelete(\'' + resposta[j]._links.self.href + '\')">Deletar</button> </td>';
+                    html+= '</tr>';
+                    text.innerHTML+=html;
+                },i
             );
-        }).join('')
-    }).catch(function (error) {
-        console.log(error);
-    });
+        };    
+}).catch (function (error) {
+    console.log(error);
+});
 }
+
 urlCustomers = 'https://customers-challenge.herokuapp.com/customers';
 getCustomers(urlCustomers);
 
@@ -118,24 +125,24 @@ function cleanModalAdd() {
 
 function changeCustomer(url) {
     axios.get(url)
-    .then(function(response){
-        console.log(response);
-        customerName = response.data.name;
-        document.getElementById('inputCustomer').value = customerName;
-    })
+        .then(function (response) {
+            console.log(response);
+            customerName = response.data.name;
+            document.getElementById('inputCustomer').value = customerName;
+        })
 }
 console.log(lista);
 
-// Metodo para exibir cidade do CUSTOMER na tabela(BUGADO)
-function getCityCustomer(url) {
-    return axios.get(url)
-        .then(function (response) {
-            console.log(response);
-            var cityName = JSON.stringify(response.data.name);
-            return cityName;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+function getCityCustomer(url, callback,i) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.send();
+    request.responseType='json';
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.response)
+            callback(this.response,i);
+        }
+    }    // if(request.readyState == 4 && request.status == 200)       
 
 }
