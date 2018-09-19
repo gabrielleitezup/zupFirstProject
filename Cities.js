@@ -13,6 +13,20 @@ function getCities(url) {
                 '</tr>'
             );
         }).join('');
+
+        var pagesHTML = document.getElementById("pages");
+        pagesHTML.innerHTML = "";
+
+        if (response.data._links.prev) {
+            pagesHTML.innerHTML = `
+            <button type="button" class="btn btn-dark" onclick="getCities('${response.data._links.prev.href}')">Página Anterior</button>
+            `;
+        }
+        if (response.data._links.next) {
+            pagesHTML.innerHTML = `
+            <button type="button" class="btn btn-dark" onclick="getCities('${response.data._links.next.href}')">Proxima Página</button>
+            `;
+        }
     }).catch(function (error) {
         console.log(error);
     });

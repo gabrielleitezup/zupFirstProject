@@ -3,8 +3,7 @@
 function getCustomers(url) {
 
     axios.get(url).then(function (response) {
-        const resposta = response.data._embedded.customers;
-        console.log("resposta:" + resposta);
+        const resposta = response.data._embedded.customers;        
         var text = document.getElementById("tabclientes");
         text.innerHTML = '';
         for (var i = 0; i < resposta.length; i++) {
@@ -27,12 +26,12 @@ function getCustomers(url) {
 
         if (response.data._links.prev) {
             pagesHTML.innerHTML = `
-            <button onclick="getCustomers('${response.data._links.prev.href}')">Prev</button>
+            <button type="button" class="btn btn-dark" onclick="getCustomers('${response.data._links.prev.href}')">Página Anterior</button>
             `;
         }
         if (response.data._links.next) {
             pagesHTML.innerHTML = `
-            <button onclick="getCustomers('${response.data._links.next.href}')">Next</button>
+            <button type="button" class="btn btn-dark" onclick="getCustomers('${response.data._links.next.href}')">Proxima Página</button>
             `;
         }
 
@@ -93,7 +92,7 @@ lista.selectedIndex = 0;
 
 function getCitiesList(url) {
 
-    axios.get('https://customers-challenge.herokuapp.com/cities').then(function (response) {
+    axios.get('https://customers-challenge.herokuapp.com/cities/search/findByNameIgnoreCaseContaining?name=').then(function (response) {
         lista.length = 0;
         const data = response.data._embedded.cities;
         let option;
