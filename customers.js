@@ -4,7 +4,7 @@ function getCustomers(url) {
 
     axios.get(url).then(function (response) {
         const resposta = response.data._embedded.customers;
-        console.log(resposta);
+        console.log("resposta:" + resposta);
         var text = document.getElementById("tabclientes");
         text.innerHTML = '';
         for (var i = 0; i < resposta.length; i++) {
@@ -17,12 +17,29 @@ function getCustomers(url) {
                 html += '<td> <button type="button" class="btn btn-danger" onclick="clienteDelete(\'' + resposta[j]._links.self.href + '\')">Deletar</button> </td>';
                 html += '</tr>';
                 text.innerHTML += html;
+
             }, i
             );
         };
+
+        var pagesHTML = document.getElementById("pages");
+        pagesHTML.innerHTML = "";
+
+        if (response.data._links.prev) {
+            pagesHTML.innerHTML = `
+            <button onclick="getCustomers('${response.data._links.prev.href}')">Prev</button>
+            `;
+        }
+        if (response.data._links.next) {
+            pagesHTML.innerHTML = `
+            <button onclick="getCustomers('${response.data._links.next.href}')">Next</button>
+            `;
+        }
+
     }).catch(function (error) {
         console.log(error);
     });
+
 }
 
 urlCustomers = 'https://customers-challenge.herokuapp.com/customers';
@@ -63,8 +80,6 @@ function cleanModalEdit(name, URLCidade, URLCustomer) {
     salvarEditar(URLCustomer);
 }
 
-
-
 // Populando o <select> com as cidades
 
 let lista = document.getElementById('city-dropdown');
@@ -87,8 +102,6 @@ function getCitiesList(url) {
             option = document.createElement('option');
             option.text = data[i].name;
             option.value = data[i]._links.self.href;
-            console.log('Value: ' + option.value);
-            console.log('URL: ' + url);
             if (url == option.value) {
                 var achei = i;
             }
@@ -195,7 +208,7 @@ function changeCustomer(url) {
 }
 
 function getCityCustomer(url, callback, i) {
-    
+
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.send();
@@ -205,6 +218,6 @@ function getCityCustomer(url, callback, i) {
             console.log(this.response)
             callback(this.response, i);
         }
-    }  
+    }
 
 }

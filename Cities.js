@@ -32,7 +32,7 @@ function postCity() {
             .then(function (response) {
                 console.log(response);
                 alert("Cidade cadastrada com sucesso!");
-                getCities();
+                getCities('https://customers-challenge.herokuapp.com/cities');
             })
             .catch(function (error) {
                 console.log(error);
@@ -69,7 +69,7 @@ function showModalChange(url) {
             .then(function (response) {
                 console.log(response);
                 alert("Cidade alterada com sucesso!");
-                getCities();
+                getCities('https://customers-challenge.herokuapp.com/cities');
             })
             .catch(function (error) {
                 console.log(error);
@@ -100,7 +100,7 @@ function cityDelete(url) {
                 console.log(response);
                 $('#deleteCityModal').modal("hide")
                 alert("Cidade deletada com sucesso!");                
-                getCities();
+                getCities('https://customers-challenge.herokuapp.com/cities');
             })
             .catch(function (error) {
                 console.log(error);

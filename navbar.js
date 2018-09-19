@@ -9,7 +9,7 @@ function navbar() {
     '                <a class="nav-link" href="customers.html">Customers</a>\n' +
     '            </li>\n' +
     '            <li class="nav-item">\n' +
-    '                <a class="nav-link" href="index.html">Cities</a>\n' +
+    '                <a class="nav-link" href="Cities.html">Cities</a>\n' +
     '            </li>\n' +
     '        </ul>\n' +
     '    </nav>\n' +
