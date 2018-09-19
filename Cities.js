@@ -18,12 +18,12 @@ function getCities(url) {
         pagesHTML.innerHTML = "";
 
         if (response.data._links.prev) {
-            pagesHTML.innerHTML = `
+            pagesHTML.innerHTML += `
             <button type="button" class="btn btn-dark" onclick="getCities('${response.data._links.prev.href}')">Página Anterior</button>
             `;
         }
         if (response.data._links.next) {
-            pagesHTML.innerHTML = `
+            pagesHTML.innerHTML += `
             <button type="button" class="btn btn-dark" onclick="getCities('${response.data._links.next.href}')">Proxima Página</button>
             `;
         }
