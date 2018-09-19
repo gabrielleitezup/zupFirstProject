@@ -1,7 +1,7 @@
 //Metodo GET para City
 
-function getCities() {
-    axios.get('https://customers-challenge.herokuapp.com/cities').then(function (response) {
+function getCities(url) {
+    axios.get(url).then(function (response) {
         const data = response.data._embedded.cities;
         console.log(data);
         document.getElementById("tabela").innerHTML = data.map(function (city) {
@@ -17,7 +17,8 @@ function getCities() {
         console.log(error);
     });
 }
-getCities();
+var url = 'https://customers-challenge.herokuapp.com/cities'
+getCities(url);
 
 // Metodo POST para City
 
@@ -110,3 +111,12 @@ function cityDelete(url) {
     $('#deleteCityModal').modal("show")
 };
 
+//Metodo de SEARCH
+
+function searchCity() {
+    var url = 'https://customers-challenge.herokuapp.com/cities/search/findByNameIgnoreCaseContaining?name=';
+    var inputSearch = document.getElementById('inputSearchCity').value;
+    url += inputSearch;
+    console.log(url);
+    getCities(url);
+};
